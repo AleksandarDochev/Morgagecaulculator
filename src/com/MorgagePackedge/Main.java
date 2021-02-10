@@ -29,6 +29,15 @@ public class Main {
         System.out.println("Your Period (Years): " + PeriodYears);
         //System print out memoraised values for testing and confirmation /\/\
 
+        float MonthlyInterestRate = AnnualInterestRate/12;
+        System.out.println("Monthly interest rate: "+ MonthlyInterestRate);
+        //Cauculating the Monthly interest rate in formula "r"
 
+        int NumberOfPayments = PeriodYears*12;
+        System.out.println("The number of payments you will have to make: " + NumberOfPayments);
+        //Cauculating the number of payments in formula "n"
+
+        //System.out.println(principal*((1+MonthlyInterestRate)^NumberOfPayments));
+        //Morgage formula /\/\
     }
 }
