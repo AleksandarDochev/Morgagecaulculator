@@ -1,5 +1,6 @@
 package com.MorgagePackedge;
 
+import javax.management.monitor.StringMonitor;
 import java.text.NumberFormat;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class Main {
 
         System.out.print("Enter your Period in Years: ");
         Scanner UserInputPeriodYears = new Scanner(System.in);
-        int PeriodYears = UserInputPeriodYears.nextInt();
+        float PeriodYears = UserInputPeriodYears.nextInt();
         //Period in Years input and memorisation /\/\
 
         System.out.println("Your principal: "+ principal);
@@ -29,15 +30,28 @@ public class Main {
         System.out.println("Your Period (Years): " + PeriodYears);
         //System print out memoraised values for testing and confirmation /\/\
 
-        float MonthlyInterestRate = AnnualInterestRate/12;
-        System.out.println("Monthly interest rate: "+ MonthlyInterestRate);
-        //Cauculating the Monthly interest rate in formula "r"
+        float MonthlyInterestRate = AnnualInterestRate/12/100;
+        System.out.println("Monthly interest rate: %"+ MonthlyInterestRate);
+        //Cauculating the Monthly interest rate dividing AnnualInterestRate
+        // by 12 because thee are 12 mouths in a year and
+        // by 100 to get it in percent
+        // in formula "r"
 
-        int NumberOfPayments = PeriodYears*12;
+        float NumberOfPayments = PeriodYears*12;
         System.out.println("The number of payments you will have to make: " + NumberOfPayments);
         //Cauculating the number of payments in formula "n"
+        //by multiplaing the years by 12 so we get the number of mouths
 
-        //System.out.println(principal*((1+MonthlyInterestRate)^NumberOfPayments));
-        //Morgage formula /\/\
+
+        double Mortgage = principal
+                         *( MonthlyInterestRate * Math.pow(1+MonthlyInterestRate , NumberOfPayments) )
+                         /( Math.pow(1+MonthlyInterestRate , NumberOfPayments) -1 );
+
+        //Mortgage formula from https://www.wikihow.com/Calculate-Mortgage-Payments /\/\
+
+        String MortgageFormated = NumberFormat.getCurrencyInstance().format(Mortgage);
+        System.out.println("Your Mortgage is : " +MortgageFormated);
+
+
     }
 }
